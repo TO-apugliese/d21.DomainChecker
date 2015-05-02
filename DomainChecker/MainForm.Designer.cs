@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.txtResponse = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.lbAllDomains = new System.Windows.Forms.ListBox();
@@ -49,36 +48,39 @@
             this.lblPercProgress = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtResponse
             // 
             this.txtResponse.AutoSize = true;
             this.txtResponse.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResponse.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtResponse.Location = new System.Drawing.Point(457, 251);
+            this.txtResponse.ForeColor = System.Drawing.Color.ForestGreen;
+            this.txtResponse.Location = new System.Drawing.Point(14, 14);
+            this.txtResponse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.txtResponse.Name = "txtResponse";
-            this.txtResponse.Size = new System.Drawing.Size(298, 26);
+            this.txtResponse.Size = new System.Drawing.Size(125, 18);
             this.txtResponse.TabIndex = 1;
-            this.txtResponse.Text = "Alle noch Aktiven Domains";
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.txtResponse.Text = "Aktive Domains";
             // 
             // txtPath
             // 
             this.txtPath.Enabled = false;
-            this.txtPath.Location = new System.Drawing.Point(50, 63);
+            this.txtPath.Location = new System.Drawing.Point(21, 45);
+            this.txtPath.Margin = new System.Windows.Forms.Padding(2);
             this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(416, 26);
+            this.txtPath.Size = new System.Drawing.Size(279, 20);
             this.txtPath.TabIndex = 2;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(472, 55);
+            this.button2.Location = new System.Drawing.Point(303, 40);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(126, 34);
+            this.button2.Size = new System.Drawing.Size(84, 22);
             this.button2.TabIndex = 3;
             this.button2.Text = "durchsuchen";
             this.button2.UseVisualStyleBackColor = true;
@@ -88,20 +90,22 @@
             // 
             this.lbAllDomains.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbAllDomains.FormattingEnabled = true;
-            this.lbAllDomains.ItemHeight = 25;
-            this.lbAllDomains.Location = new System.Drawing.Point(51, 288);
+            this.lbAllDomains.ItemHeight = 16;
+            this.lbAllDomains.Location = new System.Drawing.Point(14, 37);
+            this.lbAllDomains.Margin = new System.Windows.Forms.Padding(2);
             this.lbAllDomains.Name = "lbAllDomains";
-            this.lbAllDomains.Size = new System.Drawing.Size(348, 479);
+            this.lbAllDomains.Size = new System.Drawing.Size(233, 308);
             this.lbAllDomains.TabIndex = 5;
             // 
             // lbActiveDomains
             // 
             this.lbActiveDomains.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbActiveDomains.FormattingEnabled = true;
-            this.lbActiveDomains.ItemHeight = 25;
-            this.lbActiveDomains.Location = new System.Drawing.Point(462, 288);
+            this.lbActiveDomains.ItemHeight = 16;
+            this.lbActiveDomains.Location = new System.Drawing.Point(17, 38);
+            this.lbActiveDomains.Margin = new System.Windows.Forms.Padding(2);
             this.lbActiveDomains.Name = "lbActiveDomains";
-            this.lbActiveDomains.Size = new System.Drawing.Size(496, 479);
+            this.lbActiveDomains.Size = new System.Drawing.Size(332, 308);
             this.lbActiveDomains.TabIndex = 6;
             // 
             // label2
@@ -109,19 +113,21 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(47, 251);
+            this.label2.Location = new System.Drawing.Point(11, 13);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(270, 26);
+            this.label2.Size = new System.Drawing.Size(202, 18);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Domains aus CSV Datei";
+            this.label2.Text = "Alle importierten Domains";
             // 
             // lblAllDomainsCount
             // 
             this.lblAllDomainsCount.AutoSize = true;
             this.lblAllDomainsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAllDomainsCount.Location = new System.Drawing.Point(48, 770);
+            this.lblAllDomainsCount.Location = new System.Drawing.Point(12, 350);
+            this.lblAllDomainsCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblAllDomainsCount.Name = "lblAllDomainsCount";
-            this.lblAllDomainsCount.Size = new System.Drawing.Size(202, 25);
+            this.lblAllDomainsCount.Size = new System.Drawing.Size(145, 17);
             this.lblAllDomainsCount.TabIndex = 8;
             this.lblAllDomainsCount.Text = "Anzahl aller Domains:";
             // 
@@ -129,18 +135,22 @@
             // 
             this.lblActiveDomainsCount.AutoSize = true;
             this.lblActiveDomainsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblActiveDomainsCount.ForeColor = System.Drawing.Color.SeaGreen;
-            this.lblActiveDomainsCount.Location = new System.Drawing.Point(457, 770);
+            this.lblActiveDomainsCount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblActiveDomainsCount.Location = new System.Drawing.Point(14, 351);
+            this.lblActiveDomainsCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblActiveDomainsCount.Name = "lblActiveDomainsCount";
-            this.lblActiveDomainsCount.Size = new System.Drawing.Size(269, 25);
+            this.lblActiveDomainsCount.Size = new System.Drawing.Size(194, 17);
             this.lblActiveDomainsCount.TabIndex = 9;
             this.lblActiveDomainsCount.Text = "Anzahl aller aktiven Domains:";
             // 
             // pbFortschritt
             // 
-            this.pbFortschritt.Location = new System.Drawing.Point(49, 163);
+            this.pbFortschritt.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.pbFortschritt.Location = new System.Drawing.Point(15, 113);
+            this.pbFortschritt.Margin = new System.Windows.Forms.Padding(2);
             this.pbFortschritt.Name = "pbFortschritt";
-            this.pbFortschritt.Size = new System.Drawing.Size(1427, 37);
+            this.pbFortschritt.RightToLeftLayout = true;
+            this.pbFortschritt.Size = new System.Drawing.Size(1000, 24);
             this.pbFortschritt.TabIndex = 10;
             // 
             // label3
@@ -148,19 +158,21 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label3.Location = new System.Drawing.Point(48, 26);
+            this.label3.Location = new System.Drawing.Point(20, 21);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(414, 25);
+            this.label3.Size = new System.Drawing.Size(318, 17);
             this.label3.TabIndex = 11;
-            this.label3.Text = "Import der zu prüfenden Domains (CSV-Datei)";
+            this.label3.Text = "Bitte die zu importierende Datei auswählen (CSV)";
             // 
             // btnCheckDomains
             // 
             this.btnCheckDomains.Enabled = false;
             this.btnCheckDomains.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCheckDomains.Location = new System.Drawing.Point(51, 116);
+            this.btnCheckDomains.Location = new System.Drawing.Point(16, 82);
+            this.btnCheckDomains.Margin = new System.Windows.Forms.Padding(2);
             this.btnCheckDomains.Name = "btnCheckDomains";
-            this.btnCheckDomains.Size = new System.Drawing.Size(241, 41);
+            this.btnCheckDomains.Size = new System.Drawing.Size(161, 27);
             this.btnCheckDomains.TabIndex = 12;
             this.btnCheckDomains.Text = "Prüfen der Domains";
             this.btnCheckDomains.UseVisualStyleBackColor = true;
@@ -169,9 +181,10 @@
             // btnReset
             // 
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(996, 851);
+            this.btnReset.Location = new System.Drawing.Point(695, 553);
+            this.btnReset.Margin = new System.Windows.Forms.Padding(2);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(225, 42);
+            this.btnReset.Size = new System.Drawing.Size(150, 27);
             this.btnReset.TabIndex = 13;
             this.btnReset.Text = "Formular Reset";
             this.btnReset.UseVisualStyleBackColor = true;
@@ -180,9 +193,10 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(1251, 851);
+            this.btnClose.Location = new System.Drawing.Point(865, 553);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(225, 42);
+            this.btnClose.Size = new System.Drawing.Size(150, 27);
             this.btnClose.TabIndex = 14;
             this.btnClose.Text = "Schließen";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -192,10 +206,11 @@
             // 
             this.lblInactiveDomainsCount.AutoSize = true;
             this.lblInactiveDomainsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInactiveDomainsCount.ForeColor = System.Drawing.Color.Crimson;
-            this.lblInactiveDomainsCount.Location = new System.Drawing.Point(975, 770);
+            this.lblInactiveDomainsCount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblInactiveDomainsCount.Location = new System.Drawing.Point(359, 351);
+            this.lblInactiveDomainsCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblInactiveDomainsCount.Name = "lblInactiveDomainsCount";
-            this.lblInactiveDomainsCount.Size = new System.Drawing.Size(284, 25);
+            this.lblInactiveDomainsCount.Size = new System.Drawing.Size(205, 17);
             this.lblInactiveDomainsCount.TabIndex = 17;
             this.lblInactiveDomainsCount.Text = "Anzahl aller inaktiven Domains:";
             // 
@@ -203,30 +218,33 @@
             // 
             this.lbInactiveDomains.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbInactiveDomains.FormattingEnabled = true;
-            this.lbInactiveDomains.ItemHeight = 25;
-            this.lbInactiveDomains.Location = new System.Drawing.Point(980, 288);
+            this.lbInactiveDomains.ItemHeight = 16;
+            this.lbInactiveDomains.Location = new System.Drawing.Point(362, 38);
+            this.lbInactiveDomains.Margin = new System.Windows.Forms.Padding(2);
             this.lbInactiveDomains.Name = "lbInactiveDomains";
-            this.lbInactiveDomains.Size = new System.Drawing.Size(496, 479);
+            this.lbInactiveDomains.Size = new System.Drawing.Size(332, 308);
             this.lbInactiveDomains.TabIndex = 16;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label4.Location = new System.Drawing.Point(975, 251);
+            this.label4.ForeColor = System.Drawing.Color.Crimson;
+            this.label4.Location = new System.Drawing.Point(359, 14);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(243, 26);
+            this.label4.Size = new System.Drawing.Size(137, 18);
             this.label4.TabIndex = 15;
-            this.label4.Text = "Alle inaktive Domains";
+            this.label4.Text = "Inaktive Domains";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(412, 501);
+            this.label1.Location = new System.Drawing.Point(279, 326);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 25);
+            this.label1.Size = new System.Drawing.Size(26, 17);
             this.label1.TabIndex = 18;
             this.label1.Text = ">>";
             // 
@@ -234,9 +252,10 @@
             // 
             this.lblPercProgress.AutoSize = true;
             this.lblPercProgress.BackColor = System.Drawing.SystemColors.Control;
-            this.lblPercProgress.Location = new System.Drawing.Point(712, 128);
+            this.lblPercProgress.Location = new System.Drawing.Point(506, 89);
+            this.lblPercProgress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPercProgress.Name = "lblPercProgress";
-            this.lblPercProgress.Size = new System.Drawing.Size(60, 20);
+            this.lblPercProgress.Size = new System.Drawing.Size(43, 13);
             this.lblPercProgress.TabIndex = 19;
             this.lblPercProgress.Text = "0 von 0";
             // 
@@ -244,9 +263,10 @@
             // 
             this.btnExport.Enabled = false;
             this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExport.Location = new System.Drawing.Point(764, 851);
+            this.btnExport.Location = new System.Drawing.Point(540, 553);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(2);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(194, 41);
+            this.btnExport.Size = new System.Drawing.Size(129, 27);
             this.btnExport.TabIndex = 20;
             this.btnExport.Text = "Export als CSV";
             this.btnExport.UseVisualStyleBackColor = true;
@@ -255,41 +275,69 @@
             // btnImport
             // 
             this.btnImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImport.Location = new System.Drawing.Point(622, 55);
+            this.btnImport.Location = new System.Drawing.Point(391, 40);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(2);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(194, 34);
+            this.btnImport.Size = new System.Drawing.Size(60, 22);
             this.btnImport.TabIndex = 21;
-            this.btnImport.Text = "Import Domains";
+            this.btnImport.Text = "Import";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.lbAllDomains);
+            this.panel1.Controls.Add(this.lblAllDomainsCount);
+            this.panel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.panel1.Location = new System.Drawing.Point(15, 153);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(262, 385);
+            this.panel1.TabIndex = 22;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.txtResponse);
+            this.panel2.Controls.Add(this.lbActiveDomains);
+            this.panel2.Controls.Add(this.lblActiveDomainsCount);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.lbInactiveDomains);
+            this.panel2.Controls.Add(this.lblInactiveDomainsCount);
+            this.panel2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.panel2.Location = new System.Drawing.Point(306, 153);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(709, 385);
+            this.panel2.TabIndex = 23;
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1528, 905);
+            this.ClientSize = new System.Drawing.Size(1027, 595);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.lblPercProgress);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblInactiveDomainsCount);
-            this.Controls.Add(this.lbInactiveDomains);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnCheckDomains);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pbFortschritt);
-            this.Controls.Add(this.lblActiveDomainsCount);
-            this.Controls.Add(this.lblAllDomainsCount);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.lbActiveDomains);
-            this.Controls.Add(this.lbAllDomains);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.txtPath);
-            this.Controls.Add(this.txtResponse);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
-            this.Text = "Get Active Pages";
+            this.Text = "Domain Checker";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -298,7 +346,6 @@
         #endregion
 
         private System.Windows.Forms.Label txtResponse;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ListBox lbAllDomains;
@@ -318,6 +365,8 @@
         private System.Windows.Forms.Label lblPercProgress;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
