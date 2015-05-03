@@ -23,8 +23,8 @@ namespace GetActicePages
             FormTitle = "Domain Checker";
 
             pbFortschritt.Value = 0;
-            backgroundWorker1.WorkerSupportsCancellation = true;
-            backgroundWorker1.WorkerReportsProgress = true;
+            bwCheckDomains.WorkerSupportsCancellation = true;
+            bwCheckDomains.WorkerReportsProgress = true;
 
             DomainList = new List<string>();
         }
@@ -78,9 +78,9 @@ namespace GetActicePages
 
         private void closeApplication()
         {
-            if (backgroundWorker1.IsBusy)
+            if (bwCheckDomains.IsBusy)
             {
-                backgroundWorker1.CancelAsync();
+                bwCheckDomains.CancelAsync();
             }
 
             Application.Exit();
@@ -192,7 +192,7 @@ namespace GetActicePages
             lbActiveDomains.Items.Clear();
             lbInactiveDomains.Items.Clear();
 
-            backgroundWorker1.RunWorkerAsync(this.DomainList);
+            bwCheckDomains.RunWorkerAsync(this.DomainList);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -235,7 +235,7 @@ namespace GetActicePages
             }
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void bwCheckDomains_DoWork(object sender, DoWorkEventArgs e)
         {
             List<export> exportList = new List<export>();
             List<string> domains = e.Argument as List<string>;
@@ -247,13 +247,13 @@ namespace GetActicePages
                 {
                     count++;
 
-                    if (this.backgroundWorker1.CancellationPending)
+                    if (this.bwCheckDomains.CancellationPending)
                     {
                         e.Cancel = true;
                         return;
                     }
 
-                    backgroundWorker1.ReportProgress(count);
+                    bwCheckDomains.ReportProgress(count);
 
                     PingReply result = PingDomain(domain);
                     IPAddress[] adresses = null;
@@ -293,7 +293,7 @@ namespace GetActicePages
             e.Result = exportList;
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void bwCheckDomains_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             pbFortschritt.Value = e.ProgressPercentage;
 
@@ -304,7 +304,7 @@ namespace GetActicePages
             this.Text = progressTextTitle;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void bwCheckDomains_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.exportList = e.Result as List<export>;
 

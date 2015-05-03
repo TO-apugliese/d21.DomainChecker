@@ -50,7 +50,7 @@
             this.btnImport = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.bwCheckDomains = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -314,11 +314,11 @@
             this.panel2.Size = new System.Drawing.Size(709, 385);
             this.panel2.TabIndex = 23;
             // 
-            // backgroundWorker1
+            // bwCheckDomains
             // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            this.bwCheckDomains.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwCheckDomains_DoWork);
+            this.bwCheckDomains.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwCheckDomains_ProgressChanged);
+            this.bwCheckDomains.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwCheckDomains_RunWorkerCompleted);
             // 
             // MainForm
             // 
@@ -375,7 +375,7 @@
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker bwCheckDomains;
     }
 }
 
