@@ -20,15 +20,20 @@ namespace GetActicePages
         public MainForm()
         {
             InitializeComponent();
+            FormTitle = "Domain Checker";
+
+            pbFortschritt.Value = 0;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.WorkerReportsProgress = true;
 
             DomainList = new List<string>();
-            exportList = new List<export>();
         }
         #endregion
 
         #region Properties
         private List<string> DomainList { get; set; }
         private List<export> exportList { get; set; }
+        private string FormTitle { get; set; }
         #endregion
 
         #region Help functions
@@ -69,6 +74,16 @@ namespace GetActicePages
             lblPercProgress.Text = "0 von " + this.DomainList.Count;
 
             this.Refresh();
+        }
+
+        private void closeApplication()
+        {
+            if (backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.CancelAsync();
+            }
+
+            Application.Exit();
         }
 
         //public string printPingReply(PingReply reply)
@@ -166,7 +181,10 @@ namespace GetActicePages
 
         private void btnCheckDomains_Click(object sender, EventArgs e)
         {
-            pbFortschritt.Value = 0;
+            btnImport.Enabled = false;
+            btnOpenFile.Enabled = false;
+            btnReset.Enabled = false;
+
             pbFortschritt.Maximum = DomainList.Count;
             lblActiveDomainsCount.Text = "Anzahl aller aktiven Domains: ";
             lblInactiveDomainsCount.Text = "Anzahl aller inaktiven Domains: ";
@@ -174,71 +192,17 @@ namespace GetActicePages
             lbActiveDomains.Items.Clear();
             lbInactiveDomains.Items.Clear();
 
-            foreach (var domain in this.DomainList)
-            {
-                pbFortschritt.Value++;
-                PingReply result = PingDomain(domain);
-                IPAddress[] adresses = null;
-                string adressesAsString = string.Empty;
-
-                try
-                {
-                    adresses = Dns.GetHostAddresses(domain);
-                }
-                catch (Exception)
-                {
-                }
-
-                if (adresses != null)
-                {
-                    bool isFirst = true;
-                    foreach (var adress in adresses)
-                    {
-                        if (!isFirst)
-	                    {
-		                    adressesAsString += ", " + adress;
-	                    }
-                        else
-                        {
-                            isFirst = false;
-                            adressesAsString += adress;
-                        }
-                       
-                    }
-
-                }
-
-                if (result != null)
-                {
-                    if (result.Status == IPStatus.Success)
-                    {
-                        lbActiveDomains.Items.Add(domain + " (" + result.Address + ")");
-                    }
-                    else
-                    {
-                        lbInactiveDomains.Items.Add(domain + " (" + adressesAsString + ")");
-                    }
-                }
-
-                exportList.Add(new export { domain = domain, adress = adressesAsString, pingReply = result });
-
-                lblPercProgress.Text = pbFortschritt.Value + " von " + pbFortschritt.Maximum;
-
-                this.Refresh();
-            }
-
-            if (lbActiveDomains.Items.Count > 0 || lbInactiveDomains.Items.Count > 0)
-            {
-                btnExport.Enabled = true;
-            }
-
-            lblActiveDomainsCount.Text = "Anzahl aller aktiven Domains: " + lbActiveDomains.Items.Count;
-            lblInactiveDomainsCount.Text = "Anzahl aller inaktiven Domains: " + lbInactiveDomains.Items.Count;
+            backgroundWorker1.RunWorkerAsync(this.DomainList);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            closeApplication();         
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            closeApplication();
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -269,6 +233,107 @@ namespace GetActicePages
 
                 sw.Close();
             }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            List<export> exportList = new List<export>();
+            List<string> domains = e.Argument as List<string>;
+            int count = 0;
+
+            if (domains != null)
+            {
+                foreach (var domain in domains)
+                {
+                    count++;
+
+                    if (this.backgroundWorker1.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+
+                    backgroundWorker1.ReportProgress(count);
+
+                    PingReply result = PingDomain(domain);
+                    IPAddress[] adresses = null;
+                    string adressesAsString = string.Empty;
+
+                    try
+                    {
+                        adresses = Dns.GetHostAddresses(domain);
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+                    if (adresses != null)
+                    {
+                        bool isFirst = true;
+                        foreach (var adress in adresses)
+                        {
+                            if (!isFirst)
+                            {
+                                adressesAsString += ", " + adress;
+                            }
+                            else
+                            {
+                                isFirst = false;
+                                adressesAsString += adress;
+                            }
+
+                        }
+
+                    }
+
+                    exportList.Add(new export { domain = domain, adress = adressesAsString, pingReply = result });
+                }
+            }
+
+            e.Result = exportList;
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            pbFortschritt.Value = e.ProgressPercentage;
+
+            string progressText = pbFortschritt.Value + " von " + pbFortschritt.Maximum;
+            string progressTextTitle = FormTitle + ": " + pbFortschritt.Value + " von " + pbFortschritt.Maximum;
+
+            lblPercProgress.Text = pbFortschritt.Value + " von " + pbFortschritt.Maximum;
+            this.Text = progressTextTitle;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.exportList = e.Result as List<export>;
+
+            foreach (var exportItem in this.exportList)
+            {
+                if (exportItem != null)
+                {
+                    if (exportItem.pingReply.Status == IPStatus.Success)
+                    {
+                        lbActiveDomains.Items.Add(exportItem.domain + " (" + exportItem.adress + ")");
+                    }
+                    else
+                    {
+                        lbInactiveDomains.Items.Add(exportItem.domain + " (" + exportItem.adress + ")");
+                    }
+                }
+            }
+
+            if (lbActiveDomains.Items.Count > 0 || lbInactiveDomains.Items.Count > 0)
+            {
+                btnExport.Enabled = true;
+            }
+
+            lblActiveDomainsCount.Text = "Anzahl aller aktiven Domains: " + lbActiveDomains.Items.Count;
+            lblInactiveDomainsCount.Text = "Anzahl aller inaktiven Domains: " + lbInactiveDomains.Items.Count;
+
+            btnImport.Enabled = true;
+            btnOpenFile.Enabled = true;
+            btnReset.Enabled = true;
         }
         #endregion
     }
